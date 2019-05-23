@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>PythonWave</title>
+  <link rel="stylesheet" href="style.css">
+    <script async src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst'/></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+  <header>
+    <h1>PythonWave</h1>
+    <nav class="crumbs">
+      <ul>
+        <li class="crumb"></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="content">
+  <main>
+    <article>
+      <section>
+        <h2 id="forword">まえがき</h2>
+        <p>誤解を恐れずに言うなら，プログラミングするということは，</p>
+        <table>
+          <tr>
+            <td>( input )</td>
+            <td>: なにか
+              <b>入力</b>
+              して，
+            </td>
+          </tr>
+          <tr>
+            <td>( function )</td>
+            <td>: それを
+              <b>処理</b>
+              して，
+            </td>
+          </tr>
+          <tr>
+            <td>( output )</td>
+            <td>: それを
+              <b>出力</b>
+              する。
+            </td>
+          </tr>
+        </table>
+        <p>これしかない。なにも難しいことはない。</p>
+        <br>
+        <p>初学者が一番最初に習うプログラムとしてHello Worldがある。</p>
+        <pre class="prettyprint linenums lang=python">print('Hello World!!')</pre>
+        <table>
+          <tr>
+            <td>(in)</td>
+            <td>: 自分が打ち込んだ文字列が，</td>
+          </tr>
+          <tr>
+            <td>(fn)</td>
+            <td>: print関数を介して，</td>
+          </tr>
+          <tr>
+            <td>(out)</td>
+            <td>: コンソールに出力される。</td>
+          </tr>
+        </table>
+        <p>これだけで立派なプログラムだ。</p>
+        <br>
+        <p>次に，計算させてみる。</p>
+        <pre class="prettyprint linenums lang=python">print(1 + 2)</pre>
+        <p>当然3が出力される。</p>
+        <br>
+        <p>でも，これだと現実の物事はなにも解決してくれない。データはなにも変わらない。</p>
+        <p>テキストファイルや音声，動画ファイルがあって，</p>
+        <p>人間がやっていた作業を代わりに命令して自動化できる。</p>
+        <p>これが，本来プログラミングする目的であって，モチベーションにつながる。</p>
+      </section>
+      <section>
+        <h2 id="preparation">準備</h2>
+        <p>なにはともあれ，まずは
+          <b>環境構築</b>
+          。
+        </p>
+        <details>
+          <summary>tips</summary>
+          <p>どうしてPython？</p>
+          <p>コンピュータはC言語で動いている。それが基準だから。やっぱり初めては偉い。</p>
+          <p>もっというと，Cの前にアセンブリ言語があって，プロセッサが処理するために機械語になる。</p>
+          <p>でもそんなの気にしなくていい。裏で勝手にやってくれる。</p>
+          <p>じゃあなんでpythonを使うのか。</p>
+          <p>書きやくなるように工夫されていて，</p>
+          <p>使用者が多いと情報が集めやすいから。</p>
+          <p>それだけ。</p>
+        </details>
+        <h3>
+          <a href="https://www.python.org/">Python</a>
+        </h3>
+        <p>ダウンロードページに進んで，"Windows x86-64 executable installer"をダウンロードする。</p>
+        <p>あとはダイアログにしたがってインストールする。</p>
+        <h3>
+          <a href="https://code.visualstudio.com/">Visual Studio Code</a>
+        </h3>
+        <p>Pythonのパスを通す。</p>
+        <!-- TODO add image and text -->
+        <p>拡張機能のインストール</p>
+        <p>シンタックスハイライトからエラーチェック，</p>
+        <p>ライブラリが入ってないと警告してくれたり，とにかく便利。</p>
+        <p>2019/05/23時点最新版のPython3.7.3とVS Code1.34.0 zip版を使用する。</p>
+      </section>
+      <section>
+        <h2 id="imagine">実現したいこと</h2>
+        <p>A特性補正済みのwaveファイルから1秒毎の
+          <math>
+            <msub>
+              <mi>L</mi>
+              <mi>
+                <mi>e</mi>
+                <mi>q</mi>
+              </mi>
+            </msub>
+          </math>
+          が知りたい。
+        </p>
+        <h3>分解する</h3>
+        <table>
+          <tr>
+            <td>(in)</td>
+            <td>: waveファイルを読み込む</td>
+          </tr>
+          <tr>
+            <td>(fn)</td>
+            <td>
+              :
+              <math>
+                <msub>
+                  <mi>L</mi>
+                  <mi>
+                    <mi>e</mi>
+                    <mi>q</mi>
+                  </mi>
+                </msub>
+              </math>
+              を計算する
+            </td>
+          </tr>
+          <tr>
+            <td>(out)</td>
+            <td>: CSVに出力する</td>
+          </tr>
+        </table>
+        <h3>調べる</h3>
+        <h4>waveファイルってなんだ</h4>
+        <ul>
+          <li>構造理解</li>
+          <li>
+            取り込み方法
+            <details>
+              <summary>native Pythonでいけるか，外部ライブラリはどれが使いやすそうか</summary>
+              <p>標準ライブラリのwaveは拡張性がなさそう</p>
+              <p>モノラル/ステレオ以上の対応は書いてない．4chとかのアンビソニックス音源は読めない？</p>
+              <p>読み出しても格納が面倒そう．24bit96kHzとかややこしげ</p>
+              <p>ライブラリはPySoundFileが良さげ</p>
+              <p>簡単，これに尽きる</p>
+            </details>
+          </li>
+        </ul>
+        <h4>
+          <math>
+            <msub>
+              <mi>L</mi>
+              <mi>
+                <mi>e</mi>
+                <mi>q</mi>
+              </mi>
+            </msub>
+          </math>
+          ってなんだ
+        </h4>
+        <ul>
+          <li>
+            計算方法
+            <p>
+              <math>
+                <msub>
+                  <mi>L</mi>
+                  <mi>
+                    <mi>e</mi>
+                    <mi>q</mi>
+                  </mi>
+                </msub>
+                <mo>=</mo>
+                <mn>10</mn>
+                <mi>log</mi>
+                <mfenced open="[" close="]">
+                  <mrow>
+                    <mfrac>
+                      <mn>1</mn>
+                      <mrow>
+                        <msub>
+                          <mi>t</mi>
+                          <mn>1</mn>
+                        </msub>
+                        <mo>-</mo>
+                        <msub>
+                          <mi>t</mi>
+                          <mn>0</mn>
+                        </msub>
+                      </mrow>
+                    </mfrac>
+                    <msub>
+                      <mo>&int;</mo>
+                      <msub>
+                        <mi>t</mi>
+                        <mn>0</mn>
+                      </msub>
+                      <msub>
+                        <mi>t</mi>
+                        <mn>1</mn>
+                      </msub>
+                    </msub>
+                    <mfrac>
+                      <msup>
+                        <msub>
+                          <mi>p</mi>
+                          <mn>1</mn>
+                        </msub>
+                        <mn>2</mn>
+                      </msup>
+                      <msup>
+                        <msub>
+                          <mi>p</mi>
+                          <mn>0</mn>
+                        </msub>
+                        <mn>2</mn>
+                      </msup>
+                    </mfrac>
+                    <mi>
+                      <mi>d</mi>
+                      <mi>t</mi>
+                    </mi>
+                  </mrow>
+                </mfenced>
+              </math>
+            </p>
+            <p>
+              <math>
+                <msub>
+                  <mi>p</mi>
+                  <mn>0</mn>
+                </msub>
+              </math>
+              : 基準音圧レベル（通常 20 µPa）
+            </p>
+            <p>
+              <math>
+                <msub>
+                  <mi>p</mi>
+                  <mn>1</mn>
+                </msub>
+              </math>
+              : 収集した音圧
+            </p>
+            <p>
+              <math>
+                <msub>
+                  <mi>t</mi>
+                  <mn>0</mn>
+                </msub>
+              </math>
+              : 測定の開始時間
+            </p>
+            <p>
+              <math>
+                <msub>
+                  <mi>t</mi>
+                  <mn>1</mn>
+                </msub>
+              </math>
+              : 測定の終了時間
+            </p>
+            <p>
+              <math>
+                <mi>log</mi>
+              </math>
+              は
+              <math>
+                <msub>
+                  <mi>log</mi>
+                  <mn>10</mn>
+                </msub>
+              </math>
+              : 常用対数を表す。
+            </p>
+            <br>
+            <details>
+              <summary>って，こう書かれてもわかんない。</summary>
+              <p>わかるひとには，交流の利得の音バージョンっていえばわかる。でもわかんない。</p>
+              <p>音圧レベルの時間当たりの平均値。まだわかんない。</p>
+              <p><b>音圧レベル</b>を，</p>
+              <math>
+
+              </math>
+              <!-- TODO insert statement -->
+              <p>その時間分全部<b>足して</b>あげて，</p>
+              <math>
+
+              </math>
+              <p>計測時間で<b>割った</b>ものを，</p>
+              <math>
+
+              </math>
+              <p><b>dB</b>にする。</p>
+              <math>
+
+              </math>
+              <p>L(dB) = 入力信号の想定dB</p>
+              <p>dB = 20 log (P/P0)</p>
+              <p>P(pa) = 最大瞬時値</p>
+              <br>
+              <p>こまかく分けて見ていけば，こわくない。</p>
+            </details>
+            <br>
+          </li>
+          <li>
+            今回の実装にあたってのフィッティング
+            <p>例えば，44.1kHzだったらサンプル44100個*秒数分を足して，時間で割ってあげる．</p>
+            <p>算術平均の関数があったら使う</p>
+            <br>
+            <math>
+              <mi>RMS</mi>
+            </math>
+            : Root Mean Square value，二乗平均平方根
+          </p>
+          <p> = effective value，実効値</p>
+          <p>16bitPCMだったら-32768～32767の値が出てくるはず．これをdBに直すには……</p>
+          <p>校正信号を基準にdBSPLを計算する。</p>
+          <p>dB入力してもらってrmsから，</p>
+          <p>EU: Engineering Unit求めて0dBEUにする。</p>
+          <br>
+          <p>あとは1秒毎のrms = Leqをゴリゴリ計算させて，配列に入れる。</p>
+          <br>
+          <p>参考</p>
+          <a href="https://www.onosokki.co.jp/HP-WK/c_support/faq/dr7000/dr_02_13_2013.htm">小野測器 - DR-7100 FAQ　「収録した騒音計やマイクロホンからの音データをオースコープベーシックを使って音圧レベルとして表示する方法」</a>
+          </li>
+        </ul>
+        <h4>CSVってなんだ</h4>
+        <details>
+          <summary>Character Separated Values</summary>
+          <p>文字列を文字で区切って列にして，改行で行にする。</p>
+          <br>
+          <p>い,ろ,は\n</p>
+          <p>に,ほ,へ\n</p>
+          <p>と,ち,り\n</p>
+          <p>ぬ,る,を\n</p>
+          <br>
+          <p>\n は改行</p>
+          <p>ルールのあるテキストファイル，文字だけのExcelって感じ。</p>
+          <p>","を使うからcomma-separated valuesとも呼ばれる。というか9割はこれ。</p>
+          <p>一部 tab 区切りで.tsv とか space で区切ったりもするらしい。</p>
+          <p>列数を揃えなきゃいけないわけじゃなかったり，","をどう表現するかだったりの</p>
+          <p>細かい決まりはなくて，方言があるみたい。</p>
+          <br>
+          <p>.xml .json 等，行列でデータを表す形式はたくさんある。</p>
+        </details><br>
+        <p>今回の出力でお世話になる。</p>
+      </section>
+      <section>
+        <h2 class="anyway">とにかくやってみる</h2>
+        <p>ひとつひとつの機能を確かめてみよう</p>
+        <p>テストだ</p>
+        <p>音を扱う</p>
+        <p>組み立ててみよう</p>
+        <p>保存だ</p>
+        <br>
+        <p>結局エラーは実行時に起きるので，</p>
+        <p>載せたコードが一律で動くかを実地で確かめながら後記を残します。</p>
+        <br>
+        <p>以下コード</p>
+<p>calc.py</p>
+<pre class="prettyprint linenums lang=python">
+print("Hello World!!")
+print(1 + 1)
+print(2 - 1)
+print(2 * 3)
+print(4 / 3)
+print(8 % 3)
+
+# import: "このライブラリを使うよ"の宣言
+import numpy
+arrFoo = numpy.asarray([1, 2, 3])
+print(arrFoo)
+# as: "この略で呼べるよ"の宣言
+import numpy as np
+arrFoo = numpy.asarray([4, 5, 6])
+arrBar = np.asarray([7, 8, 9])
+print(arrFoo)
+print(arrFoo[0])
+print(arrFoo[1])
+print(arrBar)
+</pre>
+<p>本筋とは関係ないけど，グラフの表示</p>
+<p>plotWave.py</p>
+<pre class="prettyprint linenums lang=python">
+import numpy as np
+import matplotlib.pyplot as plt
+import soundfile as sf
+
+path = 'D:/documents/labo/pythonLeq/16bit1kHzMono.wav'
+
+# ファイル情報の確認
+info = sf.SoundFile(path)
+print('samplerate: ', info.samplerate)
+print('channels: ', info.channels)
+print('subtype: ', info.subtype)
+print('format: ', info.format)
+
+# データの読み込み
+# data: 振幅(-1:1), samplerate: サンプリング周波数[Hz]
+data, samplerate = sf.read(path)
+print(samplerate)
+# time: ファイルの長さ[s]
+time = np.arange(0, len(data)) / samplerate
+print('time: ', time)
+# array[-1]: 最後の要素
+print(time[-1])
+# 1秒未満の長さ
+fractionTime = len(data) % samplerate
+print('fractionTime: ', fractionTime)
+
+plt.plot(time, data, label='wave')
+# 表示する値の範囲
+plt.xlim(0, 0.003)
+plt.ylim(-1, 1)
+# 軸ラベル
+plt.xlabel('time(s)')
+plt.ylabel('amplitude')
+
+plt.show()
+plt.close()
+</pre>
+<p>leqSimu.py</p>
+<pre class="prettyprint linenums lang=python">
+import math
+
+calRms = 0.5
+spl = 94
+eu = calRms / 10**(spl/20)
+print(eu)
+wavRms= 0.1
+leq = 20*math.log10(wavRms/eu)
+print(leq)
+</pre>
+<p>amplitude.py</p>
+<pre class="prettyprint linenums lang=python">
+import numpy as np
+import soundfile as sf
+
+path = 'D:/documents/labo/pythonLeq/16bit1kHzMono.wav'
+
+# ファイル情報の確認
+info = sf.SoundFile(path)
+print('samplerate: ', info.samplerate)
+print('channels: ', info.channels)
+print('subtype: ', info.subtype)
+print('format: ', info.format)
+
+# データの読み込み
+data, samplerate = sf.read(path)
+time = np.arange(0, len(data)) / samplerate
+
+# RMSの計算
+# sqrt: 平方根
+# mean: 平均
+# [a:b]: aからbまで，ここでは1秒間
+rms = np.sqrt(np.mean(data[0:info.samplerate]**2))
+aaa = np.sqrt(np.mean(data[info.samplerate:info.samplerate*2]**2))
+bbb = np.sqrt(np.mean(data[info.samplerate*2:info.samplerate*3]**2))
+print(rms)
+print(aaa)
+print(bbb)
+</pre>
+<p>outputCsv.py</p>
+<pre class="prettyprint linenums lang=python">
+import argparse
+import datetime
+import math
+testArray = [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9, a, b, c, d, e]
+# csv出力
+filename = 'leq_' + datetime.datetime.today().strftime("%Y%m%dT%H%M%S") + '.csv'
+np.savetxt(filename, leq, delimiter=',', fmt='%d')
+</pre>
+<p>leq.py</p>
+<pre class="prettyprint linenums lang=python">
+import argparse
+import datetime
+import math
+import numpy as np
+import soundfile as sf
+
+# 引数の設定
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('inputfile')
+parser.add_argument('calibrationfile')
+parser.add_argument('SPL', type=float)
+args = parser.parse_args()
+
+inputInfo, calInfo = sf.SoundFile(args.inputfile), sf.SoundFile(args.calibrationfile)
+
+info = sf.SoundFile(args.calibrationfile)
+
+# データの読み込み
+data, samplerate = sf.read(args.inputfile)
+calData, calSR = sf.read(args.calibrationfile)
+time = np.array(np.arange(0, (len(data) / samplerate)), dtype='int32')
+print('time: ', time[-1])
+
+# 計算
+# def: 関数宣言，pythonはインデントも構文
+def rms(amp, sec):
+  return np.sqrt(np.mean(amp[samplerate*sec:samplerate*(sec+1)]**2))
+rmsCal = rms(calData, 1)
+# for statementもpythonなら内包表記でワンライン
+leq = [20*math.log10(rms(data, i)/(rmsCal/10**(args.SPL/20))) for i in range(time[-1])]
+
+# csv出力
+filename = 'leq_' + datetime.datetime.today().strftime("%Y%m%dT%H%M%S") + '.csv'
+np.savetxt(filename, leq, delimiter=',', fmt='%d')
+</pre>
+      </section>
+      <section>
+        <h2 class="afterword">あとがき</h2>
+        <p>csvはヘッダーと秒数くらいつける</p>
+        <!-- TODO -->
+        <p>consturction now...</p>
+      </section>
+    </article>
+  </main>
+  <aside>
+    <h2>目次</h2>
+    <ul>
+      <li><a href="#forword">まえがき</a></li>
+      <li><a href="#preparation">準備</a></li>
+      <li><a href="#imagine">実現したいこと</a></li>
+      <li><a href="#anyway">とにかくやってみる</a></li>
+      <li><a href="#afterword">あとがき</a></li>
+    </ul>
+  </aside>
+  </div>
+  <footer></footer>
+</body>
+</html>
