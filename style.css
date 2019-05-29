@@ -1,6 +1,7 @@
 .prettyprint ol.linenums > li {
 	list-style-type: decimal;
 }
+span.mathbg {background-color: #660}
 canvas {
   background: #999;
   display: block;
@@ -62,5 +63,6 @@ footer {
 a:link {color: #09c;}
 a:visited {color: #c3c;}
 h1, h2, h3 {color: #9c3;}
+h2 {border-bottom: 1px solid #666}
 b {color: #ff0;}
 p {margin: 0;}
