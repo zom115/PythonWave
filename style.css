@@ -2,6 +2,31 @@
 	list-style-type: decimal;
 }
 span.mathbg {background-color: #660}
+.tooltip {display: inline-block;}
+.tooltiptext {
+	position: relative;
+	cursor: pointer;
+	background: linear-gradient(transparent 60%, #660 60%);
+}
+.tooltiptext::after {
+	position: absolute;
+	transition: all 0.3s ease 0s;
+	opacity: 0;
+	top: -32px;/*HOVERのスタート位置*/
+	left: 0px;
+  display: block;
+  padding: 0 6px;
+	content: attr(data-tooltip);
+	white-space: nowrap;
+	color: #fff;
+	border-radius: 6px;
+	background: #000;
+	/* background: #1b2538; */
+}
+.tooltiptext:hover::after {
+	top: -32px;/*HOVER位置*/
+	opacity: 1;
+}
 canvas {
   background: #999;
   display: block;

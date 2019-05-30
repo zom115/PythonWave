@@ -21,62 +21,71 @@
   <main>
     <article>
       <section>
-
-
         <h2>全体像</h2>
-        <p>このページを一通り読んだら，waveファイルから1秒毎の\(L_{eq}\)をCSV形式で出力できるようになる。</p>
+        <p class="tooltip">このページを一通り読んだら，
+          <span class="tooltiptext"
+            data-tooltip="*.wavのそれ。詳細は後述。">waveファイル
+          </span>から1秒毎の
+          <span class="tooltiptext"
+            data-tooltip="騒音レベルを評価する指標のひとつ。詳細は後述。">\(L_{eq}\)
+          </span>をCSV形式で出力できるようになる。
+        </p>
         <p>おまけで，波形をグラフとして表示できるようになる。</p>
       </section>
       <section>
         <h2 id="forword">まえがき</h2>
-        <p>誤解を恐れずに言うなら，プログラミングするということは，</p>
-        <br>
-        <table>
-          <tr>
-            <td>( Input )</td>
-            <td>: なにか<b>入力</b>して，
-            </td>
-          </tr>
-          <tr>
-            <td>( Function )</td>
-            <td>: それを<b>処理</b>して，
-            </td>
-          </tr>
-          <tr>
-            <td>( Output )</td>
-            <td>: それを<b>出力</b>する。
-            </td>
-          </tr>
-        </table>
-        <br>
-        <p>これしかない。なにも難しいことはない。</p>
-        <br>
-        <p>初学者が一番最初に習うプログラムとしてHello Worldがある。</p>
-        <pre class="prettyprint linenums lang=python">print('Hello World!!')</pre>
-        <table>
-          <tr>
-            <td>( In )</td>
-            <td>: 自分が打ち込んだ文字列が，</td>
-          </tr>
-          <tr>
-            <td>( Fn )</td>
-            <td>: print関数を介して，</td>
-          </tr>
-          <tr>
-            <td>( Out )</td>
-            <td>: コンソールに出力される。</td>
-          </tr>
-        </table>
-        <p>これだけで立派なプログラムだ。</p>
-        <br>
-        <p>次に，計算させてみる。</p>
-        <pre class="prettyprint linenums lang=python">print(1 + 2)</pre>
-        <p>当然3が出力される。</p>
-        <br>
-        <p>でも，これだと現実の物事はなにも解決してくれない。データはなにも変わらない。</p>
-        <p>テキストファイルや音声，動画ファイルがあって，</p>
-        <p>人間がやっていた作業を代わりに命令して自動化できる。</p>
-        <p>これが，本来プログラミングする目的であって，モチベーションにつながる。</p>
+        <details>
+          <summary>&lt- クリックして展開</summary>
+          <p>誤解を恐れずに言うなら，プログラミングするということは，</p>
+          <br>
+          <table>
+            <tr>
+              <td>( Input )</td>
+              <td>: なにか<b>入力</b>して，
+              </td>
+            </tr>
+            <tr>
+              <td>( Function )</td>
+              <td>: それを<b>処理</b>して，
+              </td>
+            </tr>
+            <tr>
+              <td>( Output )</td>
+              <td>: それを<b>出力</b>する。
+              </td>
+            </tr>
+          </table>
+          <br>
+          <p>これしかない。なにも難しいことはない。</p>
+          <br>
+          <p>初学者が一番最初に習うプログラムとしてHello Worldがある。</p>
+          <pre class="prettyprint linenums lang=python">print('Hello World!!')</pre>
+          <table>
+            <tr>
+              <td>( In )</td>
+              <td>: 自分が打ち込んだ文字列が，</td>
+            </tr>
+            <tr>
+              <td>( Fn )</td>
+              <td>: print関数を介して，</td>
+            </tr>
+            <tr>
+              <td>( Out )</td>
+              <td>: コンソールに出力される。</td>
+            </tr>
+          </table>
+          <p>これだけで立派なプログラムだ。</p>
+          <br>
+          <p>次に，計算させてみる。</p>
+          <pre class="prettyprint linenums lang=python">print(1 + 2)</pre>
+          <p>当然3が出力される。</p>
+          <br>
+          <p>でも，これだと現実の物事はなにも解決してくれない。データはなにも変わらない。</p>
+          <p>テキストファイルや音声，動画ファイルがあって，</p>
+          <p>人間がやっていた作業を代わりに命令して自動化できる。</p>
+          <p>これが，本来プログラミングする目的であって，モチベーションにつながる。</p>
+          <!-- TODO 授業じゃやらない -->
+        </details>
       </section>
       <section>
         <h2 id="preparation">準備</h2>
@@ -87,7 +96,7 @@
           <li>環境変数を通すようにチェックして，ダイアログにしたがってインストールする。</li>
         </ul>
         <details>
-          <summary>どうしてPython？</summary>
+          <summary>column どうしてPython？</summary>
           <p>大方のコンピュータはC言語で動いている。それが基準だから。やっぱり，はじめては偉い。</p>
           <p>もっというと，Cの前にアセンブリ言語があって，プロセッサが処理するために機械語になる。</p>
           <p>でもそんなの気にしなくていい。裏で勝手にやってくれる。</p>
@@ -160,8 +169,7 @@ print(arrBar)
             <td>: CSVに出力する</td>
           </tr>
         </table>
-        <h2>調べる</h2>
-        <h3>( In ) waveファイル</h3>
+        <h2>( In ) waveファイル</h2>
         <ul>
           <li>
             <details>
@@ -171,11 +179,11 @@ print(arrBar)
               <p>PCM Palse Code Modulation パルス符号変調</p>
               <p>2つのパラメータ</p>
               <ul>
-                <li>quantization bit rate <b>量子化ビット数</b> (encoding bit rate 符号化ビット数)
-                  <p>どのくらいの度数に分けるか？</p>
-                </li>
                 <li>sampling rate <b>サンプリング周波数</b>[Hz]
                   <p>1秒間に何回書き込むか。</p>
+                </li>
+                <li>quantization bit rate <b>量子化ビット数</b> (encoding bit rate 符号化ビット数)
+                  <p>どのくらいの度数に分けるか？</p>
                 </li>
               </ul>
             </details>
@@ -234,12 +242,16 @@ plt.close()
         &=& 20\log\frac{p_1}{p_0}
         \end{eqnarray}
         \]
-        <p>\(p_0\)は基準音圧[Pa]，</p>
+        <p class="tooltip">\(p_0\)は基準音圧[Pa]， (20 µPaのとき，
+          <span class="tooltiptext"
+            data-tooltip="図書館で40dBとか，ジェット機が130dBとかのそれ">dB SPL
+          </span>という。)
+        </p>
         <p>\(p_1\)は瞬時値[Pa]，</p>
         <p>\(\log\) は \(\log_{10}\) : 常用対数を表す。</p>
         <p>「ただし\(0\lt p_0\)，\(0\lt p_1\)」あるいは絶対値をとる。</p>
         <details>
-          <summary>式の意味</summary>
+          <summary>column 式の意味</summary>
           \([dB]=10[B]\)だから10倍してる。
           <p>二乗がついてるのは分散と同じ考え方。</p>
           <p>\(\sin\)よろしく-1～1の範囲をとる。</p>
@@ -251,26 +263,29 @@ plt.close()
 <pre class="prettyprint linenums lang=python">
 import math
 
-p0 = 1
-p1 = 50000
+p0 = 20 * 10 ** -6
+p1 = 20 * 10 ** -6 * 50000
 
 print( 10 * math.log10(p1 ** 2 / p0 ** 2) ) # 数式と同じ意味
-print( 10 * math.log10((p1 / p0) ** 2 ) )
+print( 10 * math.log10( (p1 / p0) ** 2 ) )
 print( 20 * math.log10(p1 / p0) )
 
 def calc(p0, p1): # 繰り返し使えるように関数宣言 define
   print(20 * math.log10(p1 / p0), 'dB')
 
 print('twice')
-calc(1, 2)
+calc(p0, 20 * 10 ** -6 * 2) # 2倍は？
 
 print('10 times')
-calc(1, 10)
+calc(p0, 20 * 10 ** -6 * 10) # 10倍は？
+
+for i in range(1, 11): # 1から10倍
+  print(i, 'time(s)')
+  calc(p0, 20 * 10 ** -6 * i)
 </pre>
 <details>
-  <summary>上に続いて</summary>
-  <p>信用できないpython native</p>
-  <p>明示的な型宣言がないと，こういう弊害がある。</p>
+  <summary>dBの感覚</summary>
+  <p>feeling.py</p>
 <pre class="prettyprint linenums lang=python">
 p0 = 20 * 10 ** -6 # = 0.00002 = 20 * 10 ^ -6
 
@@ -295,40 +310,82 @@ print('test:', 20 * 10 ** -6) # != .00002
 p0 = .00002
 calc(p0, .00002)
 </pre>
-<p>挙動をみると16bitのint型が暗黙で動いてるっぽい。</p>
-<p>あふれたからfloatとかにいれて，そのときにはもう桁落ちしてる。</p>
-<p>きっとどこかに書いてあるんだろうけど，読むのめんどくさい。</p>
-<p>リファレンスは困ってから読むもの。</p>
+  <p>信用できないPython native</p>
+  <p>明示的な型宣言がないと，こういう弊害がある。</p>
+  <p>挙動をみると8bitの型が暗黙で動いてるっぽい。</p>
+  <p>あふれたからもっと大きい型にいれて，そのときにはもう桁落ちしてる。</p>
+  <p>きっとどこかに書いてあるんだろうけど，読むのめんどくさい。</p>
+  <p><a href="https://docs.python.org/ja/3/reference/index.html">リファレンス</a>は困ってから読むもの。</p>
 </details>
 <br>
+<p>今回の問題は"16bitが何dBか"ということ。</p>
+<p>グラフを交えて実際に計算してみる。</p>
 <p>graph.py</p>
 <pre class="prettyprint linenums lang=python">
 import math
 import matplotlib.pyplot as plt
 
+quantity = 2 ** 16
+print((20 * math.log10(quantity / 1)))
+
 x = []
 y = []
-for i in range(1, 22050):
+for i in range(1, quantity):
   x.append(i)
   y.append(20 * math.log10(i / 1))
 plt.plot(x, y)
 # plt.xscale('log')
 plt.grid(which='major', color='black', linestyle='-')
-plt.xlabel('frequency(Hz)')
+plt.xlabel('quantization bit rate')
 plt.ylabel('SPL(dB)')
 plt.show()
 plt.close()
 </pre>
+<p>16bitが96dBとすると，これを超える音を録音できなくなる。</p>
+<p>なので，\(p_0\)を"通常 20 μPa"ではなく可変にして，dB SPLに合わせる。</p>
+<p class="tooltip">このとき，
+  <span class="tooltiptext"
+    data-tooltip="1kHzの正弦波，94dB SPL">Calibration Signal 校正信号
+  </span>から\(p_0\)を求める。
+</p>
+<p><br>校正信号を基準にdB SPLを計算する。</p>
+<p class="tooltip">dB入力してもらって
+  <span class="tooltiptext"
+    data-tooltip="Root Mean Square 二乗平均平方根。後述。">\(RMS\)
+  </span>から，</p>
+<p>\(p_0=EU\): Engineering Unitとする。</p>
+\[L_{cal}=20\log_{10}\frac{p_{cal}}{EU}\]
+\[L_{cal}/20=\log_{10}\frac{p_{cal}}{EU}\]
+<details>
+  <summary>底の変換</summary>
+  \[3=\log_28\]
+  \[8=2^3\]
+</details>
+\[\frac{p_{cal}}{EU}=10^{{L_{cal}}/20}\]
+\[EU=p_{cal}/10^\left({{L_{cal}}/20}\right)\]
+\[L_{in}=20\log\frac{p_{in}}{EU}\]
+
+<p>leqSimu.py</p>
+<pre class="prettyprint linenums lang=python">
+import math
+
+pCal = 0.5 # 校正信号のRMS値(計算結果)
+lCal = 94 # 想定する校正信号の強度
+eu = pCal / 10 ** (lCal / 20)
+print(eu)
+wavRms = 0.1 # 入力信号のRMS値(計算結果)
+leq = 20 * math.log10( wavRms / eu )
+print(leq)
+</pre>
 <details>
   <summary>何bit必要？</summary>
-  <br>
-  <a href="https://www.healthyhearing.jp/topics/Topic-article-05">音の単位「dB（デシベル）」ってなに？</a>
+  <a href="https://www.healthyhearing.jp/topics/Topic-article-05">音の単位「dB（デシベル）」ってなに？ Healthy Hearing</a>
   <p>180dB？</p>
   <a href="https://www8.cao.go.jp/space/comittee/27-kiban/kiban-dai43/pdf/siryou4-2.pdf">第４３回宇宙産業・科学技術基盤部会</a>
   <p>ロケットでもせいぜい150dBらしいけど，</p>
-  <a href="https://www.ipros.jp/monosiri/science/15">オトナの中学理科講座【物理】人類の観測史上最大の『音』は？</a>
-  <p>雑学</p>
-  <a href="https://gigazine.net/news/20141002-loud-sound/">Gigazine 地球を3周した「世界で最も大きな音」とは？</a>
+  <a href="https://www.ipros.jp/monosiri/science/15">オトナの中学理科講座【物理】人類の観測史上最大の『音』は？ IPROS製造業</a>
+  <p>雑学。</p>
+  <a href="https://gigazine.net/news/20141002-loud-sound/">地球を3周した「世界で最も大きな音」とは？ Gigazine</a>
   <p>194dBが上限みたい。</p>
   <br>
   <p>dB SPLから逆算してみる。</p>
@@ -344,7 +401,7 @@ import math
 print(math.log2(10 ** (194 / 20))) # 音の限界
 </pre>
 </details>
-        <h3>( Fn ) \(L_{eq}\)</h3>
+        <h2>( Fn ) \(L_{eq}\)</h2>
         <p>音圧レベルの時間当たりの平均値。</p>
         <p>わかるひとには，交流の利得の音バージョンっていえばわかる。</p>
         <ul>
@@ -354,7 +411,7 @@ print(math.log2(10 ** (194 / 20))) # 音の限界
             <table>
               <tr>
                 <td>\(p_0\)</td>
-                <td>: 基準音圧レベル (通常 20 µPa)</td>
+                <td>: 基準音圧レベル</td>
               </tr>
               <tr>
                 <td>\(p_1\)</td>
@@ -370,10 +427,8 @@ print(math.log2(10 ** (194 / 20))) # 音の限界
               </tr>
             </table>
             <p>参考</p>
-            <a href="https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z0000019N3eSAE&l=ja-JP">Leq音圧レベルとは何ですか?</a>
-            <br>
-            <br>
-            <p>さっきの<b>音圧レベル</b>[dB]を，</p>
+            <a href="https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z0000019N3eSAE&l=ja-JP">Leq音圧レベルとは何ですか? NATIONAL INSTRUMENTS</a>
+            <p><br>さっきの<b>音圧レベル</b>[dB]を，</p>
             \[
             L_{eq}=\class{mathbg}{10\log}\left[\frac{1}{t_1-t_0}
             \int_{t_0}^{t_1}\class{mathbg}{\frac{{p_1}^2}{{p_0}^2}}dt\right]
@@ -389,29 +444,27 @@ print(math.log2(10 ** (194 / 20))) # 音の限界
             \int_{t_0}^{t_1}\frac{{p_1}^2}{{p_0}^2}dt\right]
             \]
             <br>
-            <br>
-            <p>ここで問題がでてくる。</p>
-            <p>\(p_0\)の"通常 20 μPa"がwaveファイルには適用できない。</p>
-<pre class="prettyprint linenums lang=python">
-import math
-
-def calc(p0, p1):
-  print(20 * math.log10(p1 / p0), 'dB')
-
-print('16bit dynamic range:')
-calc(1, 2 ** 16) # 96dB
-</pre>
-            <p>なので\(p_0\)を 20 μPaではなく可変にして，dB SPLに合わせる。</p>
-            <p>このとき必要となるのがCalibration Signal 校正信号</p>
-<br>
-          </li>
-          <li>今回の実装にあたってのフィッティング
-            <p>例えば，44.1kHzだったらサンプル44100個*秒数分を足して，時間で割ってあげる．</p>
-            <p>算術平均の関数があったら使う</p>
-            <br>
             <p>\(RMS\): Root Mean Square value 二乗平均平方根</p>
             <p> = effective value 実効値</p>
             \[RMS[x]=\sqrt{\frac{1}{N}\sum_{i=1}^{N}(x_i)^2}\]
+            <p>testRMS.py</p>
+<pre class="prettyprint linenums lang=python">
+import math
+
+def rms(array):
+  ans = 0
+  for i in range(len(array)):
+    ans += array[i] ** 2
+  ans = 1 / len(array) * ans
+  ans = math.sqrt(ans)
+  return ans
+
+x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print('calc:', rms(x))
+
+y = [1, 2, 3, -4, 5, 6, 7, 8, -9, 10]
+print('calc;', rms(y)) # マイナスがついてもok
+</pre>
 <p>ファイルを取り込んで計算してみる。</p>
 <p>amplitude.py</p>
 <pre class="prettyprint linenums lang=python">
@@ -432,36 +485,9 @@ rms2nd = np.sqrt(np.mean(data[info.samplerate: info.samplerate * 2] ** 2))
 rms3rd = np.sqrt(np.mean(data[info.samplerate * 2: info.samplerate * 3] ** 2))
 print(rms1st, rms2nd, rms3rd)
 </pre>
-<pre class="prettyprint linenums lang=python">
-import math
-
-x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-print(x[0:(len(x) - 1)])
-
-ans = 0
-for i in range(len(x)):
-  ans += x[i] ** 2
-  print(ans)
-ans = 1 / len(x) * ans
-print(ans)
-ans = math.sqrt(ans)
-print(ans)
-from statistics import mean
-print('mean', mean(x))
-
-def rms(array):
-  ans = 0
-  for i in range(len(array)):
-    ans += array[i] ** 2
-  ans = 1 / len(array) * ans
-  ans = math.sqrt(ans)
-  return ans
-
-print('calc:', rms(x))
-
-y = [1, 2, 3, -4, 5, 6, 7, 8, -9, 10]
-print('calc;', rms(y)) # マイナスがついてもok
-</pre>
+<details>
+  <summary>少し癖のあるnumpyの範囲指定</summary>
+  <p>setRange.py</p>
 <pre class="prettyprint linenums lang=python">
 import math
 import numpy as np
@@ -479,6 +505,10 @@ print(z, z[0:10] ** 2)
 print(z, z[0:-1] ** 2) # 配列最後尾指定の常套句 -1 は使えない
 print(z, z[0:len(z)] ** 2) # 0番目から len(z) - 1 番目まで
 </pre>
+</details>
+<details>
+  <summary>使えないnative mean</summary>
+  <p>uselessMean.py</p>
 <pre class="prettyprint linenums lang=python">
 import math
 from statistics import mean
@@ -492,27 +522,13 @@ print(sum(x[0:len(x)] ** 2))
 print(mean(x[0:len(x)] ** 2)) # 見事に小数点切り捨て
 print(np.mean(x[0:len(x)] ** 2))
 </pre>
-            <p>校正信号を基準にdB SPLを計算する。</p>
-            <p>dB入力してもらってrmsから，</p>
-            <p>\(EU\): Engineering Unit求めて0dBEUにする。</p>
-<p>leqSimu.py</p>
-<pre class="prettyprint linenums lang=python">
-import math
-
-calRms = 0.5 # 校正信号のRMS値(計算結果)
-spl = 94 # 想定する校正信号の強度
-eu = calRms / 10 ** (spl / 20) # Engineering Unit
-print(eu)
-wavRms = 0.1 # 入力信号のRMS値(計算結果)
-leq = 20 * math.log10( wavRms / eu )
-print(leq)
-</pre>
+</details>
             <br>
             <p>参考</p>
-            <a href="https://www.onosokki.co.jp/HP-WK/c_support/faq/dr7000/dr_02_13_2013.htm">小野測器 - DR-7100 FAQ　「収録した騒音計やマイクロホンからの音データをオースコープベーシックを使って音圧レベルとして表示する方法」</a>
+            <a href="https://www.onosokki.co.jp/HP-WK/c_support/faq/dr7000/dr_02_13_2013.htm">「収録した騒音計やマイクロホンからの音データをオースコープベーシックを使って音圧レベルとして表示する方法」 小野測器 - DR-7100 FAQ</a>
           </li>
         </ul>
-        <h4>( Out ) CSV</h4>
+        <h2>( Out ) CSV</h2>
         <details>
           <summary>tips</summary>
           <p>Character Separated Values</p>
@@ -538,7 +554,8 @@ print(leq)
 <pre class="prettyprint linenums lang=python">
 import datetime
 import math
-testArray = [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9, a, b, c, d, e]
+import numpy as np
+testArray = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 # csv出力
 filename = 'leq_' + datetime.datetime.today().strftime("%Y%m%dT%H%M%S") + '.csv'
 np.savetxt(filename, testArray, delimiter=',', fmt='%d')
@@ -546,10 +563,8 @@ np.savetxt(filename, testArray, delimiter=',', fmt='%d')
       </section>
       <section>
         <h2 class="anyway">とにかくやってみる</h2>
-        <p>組み立ててみよう</p>
-        <p>保存だ</p>
-        <br>
-        <br>
+        <p>あとはIn - Fn - Outを組み立てるだけ。</p>
+        <p>複数引数を取るために<a href="https://qiita.com/kzkadc/items/e4fc7bc9c003de1eb6d0">ArgumentParser</a>を使用。</p>
 <br>
 <p>leq.py</p>
 <pre class="prettyprint linenums lang=python">
@@ -561,29 +576,24 @@ import soundfile as sf
 
 # 引数の設定
 parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('inputfile')
-parser.add_argument('calibrationfile')
+parser.add_argument('inputFile')
+parser.add_argument('calibrationFile')
 parser.add_argument('SPL', type=float)
 args = parser.parse_args()
 
-inputInfo, calInfo = sf.SoundFile(args.inputfile), sf.SoundFile(args.calibrationfile)
-
-info = sf.SoundFile(args.calibrationfile)
-
-# データの読み込み
-data, samplerate = sf.read(args.inputfile)
-calData, calSR = sf.read(args.calibrationfile)
+# ( In ) データの読み込み
+data, samplerate = sf.read(args.inputFile)
+calData, calSR = sf.read(args.calibrationFile)
 time = np.array(np.arange(0, (len(data) / samplerate)), dtype='int32')
 print('time: ', time[-1])
 
-# 計算
+# ( Fn ) 計算
 def rms(amp, sec):
   return np.sqrt(np.mean(amp[samplerate*sec:samplerate*(sec+1)]**2))
 rmsCal = rms(calData, 1)
-# for statementもpythonなら内包表記でワンライン
 leq = [20*math.log10(rms(data, i)/(rmsCal/10**(args.SPL/20))) for i in range(time[-1])]
 
-# csv出力
+# ( Out ) csv出力
 filename = 'leq_' + datetime.datetime.today().strftime("%Y%m%dT%H%M%S") + '.csv'
 np.savetxt(filename, leq, delimiter=',', fmt='%d')
 </pre>
