@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="style.css">
     <script async src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst'/></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    <!-- <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 </head>
 <body>
   <header>
@@ -21,7 +20,7 @@
   <main>
     <article>
       <section>
-        <h2>全体像</h2>
+        <h2 id="overall">全体像</h2>
         <p class="tooltip">このページを一通り読んだら，
           <span class="tooltiptext"
             data-tooltip="*.wavのそれ。詳細は後述。">waveファイル
@@ -169,7 +168,7 @@ print(arrBar)
             <td>: CSVに出力する</td>
           </tr>
         </table>
-        <h2>( In ) waveファイル</h2>
+        <h2 id="input">( In ) waveファイル</h2>
         <ul>
           <li>
             <details>
@@ -187,6 +186,7 @@ print(arrBar)
                 </li>
               </ul>
             </details>
+            <br>
           </li>
           <li>
             <details>
@@ -200,7 +200,7 @@ print(arrBar)
             </details>
           </li>
         </ul>
-<p>PySoundFileの使い方と，matplotlibでグラフ表示</p>
+<p>PySoundFileの使い方，matplotlibでグラフ表示。</p>
 <p>plotWave.py</p>
 <pre class="prettyprint linenums lang=python">
 import numpy as np
@@ -252,10 +252,10 @@ plt.close()
         <p>「ただし\(0\lt p_0\)，\(0\lt p_1\)」あるいは絶対値をとる。</p>
         <details>
           <summary>column 式の意味</summary>
-          \([dB]=10[B]\)だから10倍してる。
+          [dB]=10[B]だから10倍してる。
           <p>二乗がついてるのは分散と同じ考え方。</p>
           <p>\(\sin\)よろしく-1～1の範囲をとる。</p>
-          <a href="http://our-house.jp/dbtalk/index.htm">誰も書かなかったデシベルのお話し</a>
+          <a href="http://our-house.jp/dbtalk/index.htm">誰も書かなかったデシベルのお話し STUDIO OUR HOUSE</a>
           <p>いい読み物。</p>
         </details>
         <br>
@@ -349,7 +349,7 @@ plt.close()
   </span>から\(p_0\)を求める。
 </p>
 <p><br>校正信号を基準にdB SPLを計算する。</p>
-<p class="tooltip">dB入力してもらって
+<p class="tooltip">dBを入力してもらって
   <span class="tooltiptext"
     data-tooltip="Root Mean Square 二乗平均平方根。後述。">\(RMS\)
   </span>から，</p>
@@ -389,7 +389,7 @@ print(leq)
   <p>194dBが上限みたい。</p>
   <br>
   <p>dB SPLから逆算してみる。</p>
-  <p>\(X=194dB\)として</p>
+  <p>X=194[dB]として</p>
   \[L=10\log_{10}X^2\]
   \[L=20\log_{10}X\]
   \[\frac{L}{20}=\log_{10}X\]
@@ -401,7 +401,7 @@ import math
 print(math.log2(10 ** (194 / 20))) # 音の限界
 </pre>
 </details>
-        <h2>( Fn ) \(L_{eq}\)</h2>
+        <h2 id="function">( Fn ) \(L_{eq}\)</h2>
         <p>音圧レベルの時間当たりの平均値。</p>
         <p>わかるひとには，交流の利得の音バージョンっていえばわかる。</p>
         <ul>
@@ -528,7 +528,7 @@ print(np.mean(x[0:len(x)] ** 2))
             <a href="https://www.onosokki.co.jp/HP-WK/c_support/faq/dr7000/dr_02_13_2013.htm">「収録した騒音計やマイクロホンからの音データをオースコープベーシックを使って音圧レベルとして表示する方法」 小野測器 - DR-7100 FAQ</a>
           </li>
         </ul>
-        <h2>( Out ) CSV</h2>
+        <h2 id="output">( Out ) CSV</h2>
         <details>
           <summary>tips</summary>
           <p>Character Separated Values</p>
@@ -562,8 +562,7 @@ np.savetxt(filename, testArray, delimiter=',', fmt='%d')
 </pre>
       </section>
       <section>
-        <h2 class="anyway">とにかくやってみる</h2>
-        <p>あとはIn - Fn - Outを組み立てるだけ。</p>
+        <h2 id="assemble">組み立てる</h2>
         <p>複数引数を取るために<a href="https://qiita.com/kzkadc/items/e4fc7bc9c003de1eb6d0">ArgumentParser</a>を使用。</p>
 <br>
 <p>leq.py</p>
@@ -589,7 +588,7 @@ print('time: ', time[-1])
 
 # ( Fn ) 計算
 def rms(amp, sec):
-  return np.sqrt(np.mean(amp[samplerate*sec:samplerate*(sec+1)]**2))
+  return np.sqrt(np.mean(amp[samplerate*sec:samplerate*(sec+1)] ** 2))
 rmsCal = rms(calData, 1)
 leq = [20*math.log10(rms(data, i)/(rmsCal/10**(args.SPL/20))) for i in range(time[-1])]
 
@@ -599,22 +598,28 @@ np.savetxt(filename, leq, delimiter=',', fmt='%d')
 </pre>
       </section>
       <section>
-        <h2 class="afterword">あとがき</h2>
+        <h2 id="afterword">あとがき</h2>
         <p>TODO</p>
-        <p>リンク名を統一</p>
-        <p>数式と単位をLaTeX形式に統一</p>
         <p>jupyter notebookとかgoogle colaboratoryにコードを移す</p>
+        <p>構成を考える。amplitude -> EU: rms, spl</p>
         <p>csvはヘッダーと秒数くらいつける</p>
+        <p>複数ch対応</p>
+        <br>
+        <p>note Lmaxはnumpyのarray.max()とかですぐ出せる。</p>
       </section>
     </article>
   </main>
   <aside>
     <h2>目次</h2>
     <ul>
+      <li><a href="#overall">全体像</a></li>
       <li><a href="#forword">まえがき</a></li>
       <li><a href="#preparation">準備</a></li>
       <li><a href="#imagine">実現したいこと</a></li>
-      <li><a href="#anyway">とにかくやってみる</a></li>
+      <li><a href="#input">( In ) waveファイル</a></li>
+      <li><a href="#function">( Fn ) \(L_{eq}\)</a></li>
+      <li><a href="#output">( Out ) CSV</a></li>
+      <li><a href="#assemble">組み立てる</a></li>
       <li><a href="#afterword">あとがき</a></li>
     </ul>
   </aside>
